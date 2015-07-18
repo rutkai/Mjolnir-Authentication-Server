@@ -1,0 +1,16 @@
+{
+  "httpPort": 6666,
+  "httpsPort": 6667,
+  "serverOwner": "Tester",
+  "timestampFormat": "YYYY-MM-DD HH:mm:ss| ",
+  "hashAlgorithm": "md5",
+  "secret": "test-token",
+  "users": [
+    {
+      "id": "test0123456789abcdef",
+      "username": "test",
+      "password": "098f6bcd4621d373cade4e832627b4f6", // test using MD5
+      "playerName": "testPlayer"
+    }
+  ]
+}

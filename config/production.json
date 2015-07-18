@@ -1,0 +1,22 @@
+{
+  "httpPort": 80,
+  "httpsPort": 443,
+  "serverOwner": "Owner",
+  "hashAlgorithm": "sha512", // Use better than MD5
+  "secret": "Change this not secret token", // CHANGE THIS LINE TO SOMETHING RANDOM
+  "certification": {
+    "country": "HU",
+    "state": "Budapest",
+    "organization": "Rutkai",
+    "organizationUnit": "Single developer",
+    "emailAddress": "mail@mail.com"
+  },
+  "users": [
+    { // Sample user, change it or remove it in production!
+      "id": "test0123456789abcdef",
+      "username": "test",
+      "password": "098f6bcd4621d373cade4e832627b4f6", // test/test using MD5
+      "playerName": "test"
+    }
+  ]
+}
