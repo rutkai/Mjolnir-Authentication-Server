@@ -1,5 +1,5 @@
-Mjölnir-Authentication
-======================
+Mjolnir Authentication Server
+=============================
 
 Abstract
 --------
@@ -27,7 +27,7 @@ Installation
 
     npm install --production
 
-Generate new SSL certificates for your server (IMPORTANT):
+Generate new SSL certificates for your server:
 
     ./generate_ssl.sh
     
@@ -39,14 +39,14 @@ To start server you have to execute the following command in console:
     
 ### Minecraft clients and servers
 
-You have to create a redirection from the original auth server to your server. You can do this by adding your server to the hosts file:
+You have to create a redirection from the original auth server to your server. You can do this by adding a new line to the hosts file on your machine:
 
 Windows: C:\Windows\System32\drivers\etc\hosts
 Linux: /etc/hosts
 
     your.server.com	authserver.mojang.com
 
-Then, you have to trust the server's certificate. It is a fake one so this this step is necessary.
+Then, you have to trust the server's certificate. It is a fake one so this step is necessary.
 
 First, generate the `jssecacerts` file from the server's private key:
 
@@ -92,6 +92,15 @@ Environment variables:
     MJOLNIR_VERBOSE: boolean, set true to verbose mode
     NODE_ENV: environment in which the application should run, the default is development; can be: production, testing
 
+### Running the tests
+
+First, start the server in testing mode:
+
+    NODE_ENV=testing node index.js
+    
+Then the tests:
+
+    NODE_ENV=testing jasmine-node test
 
 Roadmap/Changelog
 -----------------

@@ -17,8 +17,8 @@ frisby.create('Nothing gives authentication error')
 
 frisby.create('Missing user gives authentication error')
     .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-        username: "nonexistent",
-        password: "asdf"
+        "username": "nonexistent",
+        "password": "asdf"
     })
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
@@ -34,8 +34,8 @@ frisby.create('Missing user gives authentication error')
 
 frisby.create('Wrong password gives authentication error')
     .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-        username: "test",
-        password: "asdf"
+        "username": "test",
+        "password": "asdf"
     })
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
@@ -51,8 +51,8 @@ frisby.create('Wrong password gives authentication error')
 
 frisby.create('Valid credentials without clientToken and agent token')
     .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-        username: "test",
-        password: "test"
+        "username": "test",
+        "password": "test"
     })
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
@@ -64,9 +64,9 @@ frisby.create('Valid credentials without clientToken and agent token')
 
 frisby.create('Valid credentials with clientToken and agent token')
     .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-        username: "test",
-        password: "test",
-        clientToken: "test-client-token"
+        "username": "test",
+        "password": "test",
+        "clientToken": "test-client-token"
     })
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
@@ -81,12 +81,12 @@ frisby.create('Valid credentials with clientToken and agent token')
 
 frisby.create('Valid credentials with agent token')
     .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-        agent: {
-            name: "Minecraft",
-            version: 1
+        "agent": {
+            "name": "Minecraft",
+            "version": 1
         },
-        username: "test",
-        password: "test"
+        "username": "test",
+        "password": "test"
     })
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')

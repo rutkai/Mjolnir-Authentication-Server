@@ -1,5 +1,5 @@
 {
-  "name": "Mjolnir-Authentication",
+  "name": "Mjolnir Authentication Server",
   "version": "1.0.0",
   "description": "Mjolnir Authentication - an open source alternative to Yggdrasil Authentication",
   "main": "index.js",

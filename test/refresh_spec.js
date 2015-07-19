@@ -7,8 +7,8 @@ frisby.create('Nothing gives illegal argument error')
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
     .expectJSON({
-        error: "IllegalArgumentException",
-        errorMessage: "Access Token can not be null or empty."
+        "error": "IllegalArgumentException",
+        "errorMessage": "Access Token can not be null or empty."
     })
     .expectJSONTypes({
         "error": String,
@@ -18,13 +18,13 @@ frisby.create('Nothing gives illegal argument error')
 
 frisby.create('Missing client token gives invalid token error')
     .post('http://localhost:' + config.get('httpPort') + '/refresh', {
-        accessToken: "nonexistent"
+        "accessToken": "nonexistent"
     })
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
     .expectJSON({
-        error: "ForbiddenOperationException",
-        errorMessage: "Invalid token."
+        "error": "ForbiddenOperationException",
+        "errorMessage": "Invalid token."
     })
     .expectJSONTypes({
         "error": String,
@@ -34,21 +34,21 @@ frisby.create('Missing client token gives invalid token error')
 
 frisby.create('Authenticating for refresh')
     .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-        username: "test",
-        password: "test",
-        clientToken: "test-client-token"
+        "username": "test",
+        "password": "test",
+        "clientToken": "test-client-token"
     })
-    .afterJSON(function (response) {
+    .afterJSON(function () {
         frisby.create('then wrong access token gives invalid token error')
             .post('http://localhost:' + config.get('httpPort') + '/refresh', {
-                accessToken: "nonexistent",
-                clientToken: "test-client-token"
+                "accessToken": "nonexistent",
+                "clientToken": "test-client-token"
             })
             .expectStatus(200)
             .expectHeaderContains('content-type', 'application/json')
             .expectJSON({
-                error: "ForbiddenOperationException",
-                errorMessage: "Invalid token."
+                "error": "ForbiddenOperationException",
+                "errorMessage": "Invalid token."
             })
             .expectJSONTypes({
                 "error": String,
@@ -61,21 +61,21 @@ frisby.create('Authenticating for refresh')
 syncTestRunner.registerTest(
     frisby.create('Authenticating for refresh')
         .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-            username: "test",
-            password: "test",
-            clientToken: "test-client-token"
+            "username": "test",
+            "password": "test",
+            "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('then wrong client token gives invalid token error')
                 .post('http://localhost:' + config.get('httpPort') + '/refresh', {
-                    accessToken: response.accessToken,
-                    clientToken: "nonexistent"
+                    "accessToken": response.accessToken,
+                    "clientToken": "nonexistent"
                 })
                 .expectStatus(200)
                 .expectHeaderContains('content-type', 'application/json')
                 .expectJSON({
-                    error: "ForbiddenOperationException",
-                    errorMessage: "Invalid token."
+                    "error": "ForbiddenOperationException",
+                    "errorMessage": "Invalid token."
                 })
                 .expectJSONTypes({
                     "error": String,
@@ -91,15 +91,15 @@ syncTestRunner.registerTest(
 syncTestRunner.registerTest(
     frisby.create('Authenticating for refresh')
         .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-            username: "test",
-            password: "test",
-            clientToken: "test-client-token"
+            "username": "test",
+            "password": "test",
+            "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('then refreshing with valid tokens gives new access token')
                 .post('http://localhost:' + config.get('httpPort') + '/refresh', {
-                    accessToken: response.accessToken,
-                    clientToken: "test-client-token"
+                    "accessToken": response.accessToken,
+                    "clientToken": "test-client-token"
                 })
                 .expectStatus(200)
                 .expectHeaderContains('content-type', 'application/json')
@@ -107,7 +107,7 @@ syncTestRunner.registerTest(
                     accessToken: function (val) {
                         expect(val).not.toEqual(response.accessToken)
                     },
-                    clientToken: "test-client-token"
+                    "clientToken": "test-client-token"
                 })
                 .expectJSONTypes({
                     "accessToken": String,
@@ -123,26 +123,26 @@ syncTestRunner.registerTest(
 syncTestRunner.registerTest(
     frisby.create('Authenticating for refresh')
         .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-            username: "test",
-            password: "test",
-            clientToken: "test-client-token"
+            "username": "test",
+            "password": "test",
+            "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('then refreshing with valid tokens and selectedProfile gives the same selectedProfile')
                 .post('http://localhost:' + config.get('httpPort') + '/refresh', {
-                    accessToken: response.accessToken,
-                    clientToken: "test-client-token",
-                    selectedProfile: {
-                        id: "test0123456789abcdef",
-                        name: "testPlayer"
+                    "accessToken": response.accessToken,
+                    "clientToken": "test-client-token",
+                    "selectedProfile": {
+                        "id": "test0123456789abcdef",
+                        "name": "testPlayer"
                     }
                 })
                 .expectStatus(200)
                 .expectHeaderContains('content-type', 'application/json')
                 .expectJSON({
-                    selectedProfile: {
-                        id: "test0123456789abcdef",
-                        name: "testPlayer"
+                    "selectedProfile": {
+                        "id": "test0123456789abcdef",
+                        "name": "testPlayer"
                     }
                 })
                 .expectJSONTypes({
