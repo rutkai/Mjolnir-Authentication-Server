@@ -40,6 +40,12 @@ To start server you have to execute the following command in console:
     NODE_ENV=production node index.js
 
 If you want to use your authentication server, I can recommend using [forever](https://github.com/foreverjs/forever).
+
+#### Selecting encryption algorithm
+
+You can dump the available encryption algorithms by running the server in verbose mode:
+
+    MJOLNIR_VERBOSE=true node index.js
     
 ### Minecraft clients and servers
 
@@ -83,6 +89,24 @@ Important notes for configuring the Production environment:
 * The secret token must be changed to a randomly generated token!
 * The user in the production config serves as an example, remove it before going out in production!
 
+### Creating a user in config
+
+Open the `config/production.json` file using a text editor. Then add the following lines between the brackets, like this:
+
+    "users": [
+        {   // a user
+          "id": "test0123456789abcdef", // this ID can be anything but it must be unique!
+          "username": "test",
+          "password": "098f6bcd4621d373cade4e832627b4f6", // here is your encrypted password using the algorithm that you've selected
+          "playerName": "test"
+        },
+        {   // a second sample user
+          "id": "test0123456789abcdef",
+          "username": "test",
+          "password": "098f6bcd4621d373cade4e832627b4f6",
+          "playerName": "test"
+        }
+    ]
 
 Dev Installation
 ----------------
