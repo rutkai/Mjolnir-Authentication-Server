@@ -25,23 +25,28 @@ Installation
 
 ### Authentication server
 
+Download the sources, then:
+
     npm install --production
 
-Generate new SSL certificates for your server:
+Generate a new SSL certificate for your server:
 
     ./generate_ssl.sh
     
-Note that you may have to change the owner of the certification to the same user as node server's!
+*Note that you may have to change the owner of the certification to the same user as node server's!*
     
 To start server you have to execute the following command in console:
 
     NODE_ENV=production node index.js
+
+If you want to use your authentication server, I can recommend using [forever](https://github.com/foreverjs/forever).
     
 ### Minecraft clients and servers
 
 You have to create a redirection from the original auth server to your server. You can do this by adding a new line to the hosts file on your machine:
 
 Windows: C:\Windows\System32\drivers\etc\hosts
+
 Linux: /etc/hosts
 
     your.server.com	authserver.mojang.com
@@ -63,8 +68,8 @@ Then, you have to copy the newly generated `jssecacerts` file to the following d
     <JAVA_HOME>/jre/lib/security
 
 
-Configuring
------------
+Configuration
+-------------
 
 There are three configuration files:
 
@@ -101,6 +106,11 @@ First, start the server in testing mode:
 Then the tests:
 
     NODE_ENV=testing jasmine-node test
+    
+Specification
+-------------
+
+[Documentation](http://wiki.vg/Authentication)
 
 Roadmap/Changelog
 -----------------
