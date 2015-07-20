@@ -154,5 +154,3 @@ syncTestRunner.registerTest(
                 .toss();
         })
 );
-
-syncTestRunner.runNext();

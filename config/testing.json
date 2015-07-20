@@ -11,6 +11,15 @@
       "username": "test",
       "password": "098f6bcd4621d373cade4e832627b4f6", // test using MD5
       "playerName": "testPlayer"
+    },
+    {
+      "id": "testOld0123456789abcdef",
+      "username": "testOld",
+      "password": "098f6bcd4621d373cade4e832627b4f6",
+      "playerName": "testPlayerOld",
+      "clientToken": "test-old-client-token",
+      "accessToken": "d41d8cd98f00b204e9800998ecf8427e",
+      "lastLogin": "2015-04-23T18:25:43.511Z"
     }
   ]
 }

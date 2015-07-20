@@ -1,20 +1,16 @@
-module.exports = (function () {
-    var tests = [],
-        testPointer = 0,
+var tests = [];
 
-        registerTest = function (test) {
-            tests.push(test)
-        },
-        runNext = function () {
-            if (testPointer >= tests.length) {
-                return;
-            }
 
-            tests[testPointer++].toss();
-        };
+exports.registerTest = registerTest;
+function registerTest(test) {
+    tests.push(test)
+}
 
-    return {
-        registerTest: registerTest,
-        runNext: runNext
-    };
-}());
+exports.runNext = runNext;
+function runNext() {
+    if (!tests.length) {
+        return;
+    }
+
+    tests.shift().toss();
+}

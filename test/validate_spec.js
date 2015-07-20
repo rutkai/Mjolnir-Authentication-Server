@@ -33,20 +33,44 @@ frisby.create('Invalid access token gives exception')
     })
     .toss();
 
-frisby.create('After authentication')
-    .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
-        "username": "test",
+frisby.create('Old login returns exception')
+    .post('http://localhost:' + config.get('httpPort') + '/validate', {
+        "username": "testOld",
         "password": "test",
-        "clientToken": "test-client-token"
+        "accessToken": "d41d8cd98f00b204e9800998ecf8427e"
     })
-    .afterJSON(function (response) {
-        frisby.create('the validate accepts the accessToken')
-            .post('http://localhost:' + config.get('httpPort') + '/validate', {
-                "accessToken": response.accessToken
-            })
-            .expectStatus(200)
-            .expectHeaderContains('content-type', 'application/json')
-            .expectJSONLength(0)
-            .toss();
+    .expectStatus(200)
+    .expectHeaderContains('content-type', 'application/json')
+    .expectJSON({
+        "error": "ForbiddenOperationException",
+        "errorMessage": "Invalid token"
+    })
+    .expectJSONTypes({
+        "error": String,
+        "errorMessage": String
     })
     .toss();
+
+syncTestRunner.registerTest(
+    frisby.create('After authentication')
+        .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+            "username": "test",
+            "password": "test",
+            "clientToken": "test-client-token"
+        })
+        .afterJSON(function (response) {
+            frisby.create('the validate accepts the accessToken')
+                .post('http://localhost:' + config.get('httpPort') + '/validate', {
+                    "accessToken": response.accessToken
+                })
+                .expectStatus(200)
+                .expectHeaderContains('content-type', 'application/json')
+                .expectJSONLength(0)
+                .after(function () {
+                    syncTestRunner.runNext();
+                })
+                .toss();
+        })
+);
+
+syncTestRunner.runNext();
