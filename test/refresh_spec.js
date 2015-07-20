@@ -32,6 +32,7 @@ frisby.create('Missing client token gives invalid token error')
     })
     .toss();
 
+syncTestRunner.registerTest(
 frisby.create('Authenticating for refresh')
     .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
         "username": "test",
@@ -54,9 +55,12 @@ frisby.create('Authenticating for refresh')
                 "error": String,
                 "errorMessage": String
             })
+            .after(function () {
+                syncTestRunner.runNext();
+            })
             .toss();
     })
-    .toss();
+);
 
 syncTestRunner.registerTest(
     frisby.create('Authenticating for refresh')
