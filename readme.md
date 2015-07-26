@@ -108,6 +108,19 @@ Open the `config/production.json` file using a text editor. Then add the followi
         }
     ]
 
+Utilities
+---------
+
+### Password hash generator
+
+You can generate password hashes using the command line interface. Usage (production mode):
+
+    NODE_ENV=production node cli.js create-hash
+    
+Then type in your password using the interactive console.
+
+Note: You will not see the characters you are typing in!
+
 Dev Installation
 ----------------
 
