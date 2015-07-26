@@ -23,6 +23,22 @@ In which cases are good such system?
 Installation
 ------------
 
+### Prerequisites
+
+Node.js have to be installed on your system.
+
+#### Installation on Debian based systems (e.g. Ubuntu):
+
+    sudo apt-get install nodejs
+    
+The command above may not register the command `node` on your system. It is recommended to register it by creating a symlink (otherwise use the command `nodejs` instead `node` in the examples below):
+
+    sudo ln -s nodejs /usr/bin/node
+    
+#### Installation on Windows
+
+[Download](https://nodejs.org/download/) and install the latest version of Node.js.
+
 ### Authentication server
 
 Download the sources, then:
