@@ -1,10 +1,11 @@
 var frisby = require('frisby');
 var config = require('config');
+var httpPort = config.get('authserver.httpPort');
 var syncTestRunner = require('./synchronousTestRunner');
 
 
 frisby.create('Nothing gives illegal argument error')
-    .get('http://localhost:' + config.get('httpPort') + '/validate')
+    .get('http://localhost:' + httpPort + '/validate')
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
     .expectJSON({
@@ -18,7 +19,7 @@ frisby.create('Nothing gives illegal argument error')
     .toss();
 
 frisby.create('Invalid access token gives exception')
-    .post('http://localhost:' + config.get('httpPort') + '/validate', {
+    .post('http://localhost:' + httpPort + '/validate', {
         "accessToken": "nonexistent"
     })
     .expectStatus(200)
@@ -34,7 +35,7 @@ frisby.create('Invalid access token gives exception')
     .toss();
 
 frisby.create('Old login returns exception')
-    .post('http://localhost:' + config.get('httpPort') + '/validate', {
+    .post('http://localhost:' + httpPort + '/validate', {
         "username": "testOld",
         "password": "test",
         "accessToken": "d41d8cd98f00b204e9800998ecf8427e"
@@ -53,14 +54,14 @@ frisby.create('Old login returns exception')
 
 syncTestRunner.registerTest(
     frisby.create('After authentication')
-        .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+        .post('http://localhost:' + httpPort + '/authenticate', {
             "username": "test",
             "password": "test",
             "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('the validate accepts the accessToken')
-                .post('http://localhost:' + config.get('httpPort') + '/validate', {
+                .post('http://localhost:' + httpPort + '/validate', {
                     "accessToken": response.accessToken
                 })
                 .expectStatus(200)

@@ -1,14 +1,25 @@
 {
-  "httpPort": 9000,
-  "httpsPort": 9001,
   "serverOwner": "Developer",
   "timestampFormat": "YYYY-MM-DD HH:mm:ss| ",
   "hashAlgorithm": "md5",
   "secret": "Dev token",
-  "certification": {
-    "days": 365,
-    "selfSigned": true,
-    "commonName": "authserver.mojang.com"
+  "authserver": {
+    "httpPort": 9000,
+    "httpsPort": 9001,
+    "certification": {
+      "days": 365,
+      "selfSigned": true,
+      "commonName": "authserver.mojang.com"
+    }
+  },
+  "sessionserver": {
+    "httpPort": 9010,
+    "httpsPort": 9011,
+    "certification": {
+      "days": 365,
+      "selfSigned": true,
+      "commonName": "sessionserver.mojang.com"
+    }
   },
   "drivers": ["config"],
   "users": [

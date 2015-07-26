@@ -11,6 +11,6 @@ env:
   global:
     NODE_ENV=testing
 before_script:
-- node index.js
+- node app.js
 - sleep 2
 script: jasmine-node test

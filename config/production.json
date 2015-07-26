@@ -1,6 +1,4 @@
 {
-  "httpPort": 80,
-  "httpsPort": 443,
   "serverOwner": "Owner",
   "hashAlgorithm": "sha512", // Use better than MD5
   "secret": "Change this not secret token", // CHANGE THIS LINE TO SOMETHING RANDOM

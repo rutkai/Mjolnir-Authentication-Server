@@ -2,6 +2,7 @@
   "name": "mjolnir-authentication-server",
   "version": "1.0.0",
   "description": "Mjolnir Authentication - an open source alternative to Yggdrasil Authentication",
+  "homepage": "",
   "main": "index.js",
   "scripts": {
     "test": "true",
@@ -11,8 +12,8 @@
     "mjolnir",
     "yggdrasil"
   ],
-  "author": "András Rutkai",
-  "license": "BSD-2-Clause",
+  "author": "András Rutkai (http://rutkai.com/)",
+  "license": "MIT",
   "dependencies": {
     "express": "~4.0.0",
     "body-parser": "~1.0.1",
@@ -20,10 +21,15 @@
     "config": "~1.14.0",
     "pem": "~1.7.2",
     "yargs": "~3.15.0",
-    "promptly": "~0.2.1"
+    "promptly": "~0.2.1",
+    "node-uuid": "~1.4.3"
   },
   "devDependencies": {
     "jasmine-node": "~1.14.5",
     "frisby": "~0.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
   }
 }

@@ -53,15 +53,69 @@ Generate a new SSL certificate for your server:
     
 To start server you have to execute the following command in console:
 
-    NODE_ENV=production node index.js
+    NODE_ENV=production node app.js
 
 If you want to use your authentication server, I can recommend using [forever](https://github.com/foreverjs/forever).
 
+#### Installing and configuring Apache proxy
+
+Install Apache2:
+
+    sudo apt-get install apache2
+    
+Then enable modproxy:
+
+    sudo a2enmod proxy_http
+
+Then add the following lines to your Apache2 config (usually `/etc/apache2/sites-enabled/000-default`):
+
+    # Authserver
+    <VirtualHost *:443>
+        ServerName authserver.mojang.com
+        
+        <Proxy *>
+            Order deny,allow
+            Allow from all
+        </Proxy>
+        
+        SSLEngine on
+        SSLProxyEngine On
+        SSLCertificateFile <path-to-mjolnir>/cert/authserver/certificate.crt
+        SSLCertificateKeyFile <path-to-mjolnir>/cert/authserver/certificate.key
+        
+        ProxyRequests off
+        ProxyPreserveHost on
+        ProxyPass / http://localhost:9000/
+        ProxyPassReverse / http://localhost:9000/
+    </VirtualHost>
+    
+    # Sessionserver
+    <VirtualHost *:443>
+        ServerName sessionserver.mojang.com
+        
+        <Proxy *>
+            Order deny,allow
+            Allow from all
+        </Proxy>
+        
+        SSLEngine on
+        SSLProxyEngine On
+        SSLCertificateFile <path-to-mjolnir>/cert/sessionserver/certificate.crt
+        SSLCertificateKeyFile <path-to-mjolnir>/cert/sessionserver/certificate.key
+        
+        ProxyRequests off
+        ProxyPreserveHost on
+        ProxyPass / http://localhost:9010/
+        ProxyPassReverse / http://localhost:9010/
+    </VirtualHost>
+
+Note: You have to start your Mjolnir server to create the certificate files!
+    
 #### Selecting encryption algorithm
 
 You can dump the available encryption algorithms by running the server in verbose mode:
 
-    MJOLNIR_VERBOSE=true node index.js
+    MJOLNIR_VERBOSE=true node app.js
     
 ### Minecraft clients and servers
 
@@ -71,7 +125,13 @@ Windows: C:\Windows\System32\drivers\etc\hosts
 
 Linux: /etc/hosts
 
-    your.server.com	authserver.mojang.com
+    <ip-addr-of-your-auth-server>	authserver.mojang.com
+    
+Note: if you don't know the IP address of the auth server, open a command line and ping the domain: `ping your.domain.com` 
+    
+Or if the auth server is on the same machine on the Minecraft server/client:
+
+    127.0.0.1 authserver.mojang.com
 
 Then, you have to trust the server's certificate. It is a fake one so this step is necessary.
 
@@ -83,12 +143,18 @@ Windows:
 
 Linux:
 
-    generate_cacert.sh
+    ./generate_cacert.sh
     
 Then, you have to copy the newly generated `jssecacerts` file to the following directory:
 
     <JAVA_HOME>/jre/lib/security
 
+Note: <JAVA_HOME> is usually
+
+* `/usr/lib/jvm/java-*` on linux machines.
+* `C:\Program files (x86)\Java` on windows machines.
+
+Note 2: The windows Minecraft launcher may download a different Java version than the installed. You may find this version in the `runtime` folder which should be in the same folder as the `launcher.exe`
 
 Configuration
 -------------
@@ -111,13 +177,13 @@ Open the `config/production.json` file using a text editor. Then add the followi
 
     "users": [
         {   // a user
-          "id": "test0123456789abcdef", // this ID can be anything but it must be unique!
+          "id": "6c84fb90-12c4-12e1-840d-7b25c5ee775a", // this ID must be a UUID and it must be unique!
           "username": "test",
           "password": "098f6bcd4621d373cade4e832627b4f6", // here is your encrypted password using the algorithm that you've selected
           "playerName": "test"
         },
         {   // a second sample user
-          "id": "test0123456789abcdef",
+          "id": "110ec58a-aaf2-4ac4-8393-c866d813b8d1",
           "username": "test",
           "password": "098f6bcd4621d373cade4e832627b4f6",
           "playerName": "test"
@@ -137,6 +203,12 @@ Then type in your password using the interactive console.
 
 Note: You will not see the characters you are typing in!
 
+### UUID generator
+
+You can generate UUID-s for users with the following command:
+
+    node cli.js generate-uuid
+
 Dev Installation
 ----------------
 
@@ -154,7 +226,7 @@ Environment variables:
 
 First, start the server in testing mode:
 
-    NODE_ENV=testing node index.js
+    NODE_ENV=testing node app.js
     
 Then the tests:
 

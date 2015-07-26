@@ -1,9 +1,10 @@
 var frisby = require('frisby');
 var config = require('config');
+var httpPort = config.get('authserver.httpPort');
 var syncTestRunner = require('./synchronousTestRunner');
 
 frisby.create('Nothing gives illegal argument error')
-    .get('http://localhost:' + config.get('httpPort') + '/signout')
+    .get('http://localhost:' + httpPort + '/signout')
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
     .expectJSON({
@@ -17,7 +18,7 @@ frisby.create('Nothing gives illegal argument error')
     .toss();
 
 frisby.create('Invalid user gives exception')
-    .post('http://localhost:' + config.get('httpPort') + '/signout', {
+    .post('http://localhost:' + httpPort + '/signout', {
         "username": "non-existent-user",
         "password": "random"
     })
@@ -34,7 +35,7 @@ frisby.create('Invalid user gives exception')
     .toss();
 
 frisby.create('Empty password gives exception')
-    .post('http://localhost:' + config.get('httpPort') + '/signout', {
+    .post('http://localhost:' + httpPort + '/signout', {
         "username": "test"
     })
     .expectStatus(200)
@@ -51,14 +52,14 @@ frisby.create('Empty password gives exception')
 
 syncTestRunner.registerTest(
     frisby.create('Authenticating for signing out')
-        .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+        .post('http://localhost:' + httpPort + '/authenticate', {
             "username": "test",
             "password": "test",
             "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('then logging out with invalid credentials do not invalidate the session')
-                .post('http://localhost:' + config.get('httpPort') + '/signout', {
+                .post('http://localhost:' + httpPort + '/signout', {
                     "username": "test",
                     "password": "wrong-password"
                 })
@@ -74,7 +75,7 @@ syncTestRunner.registerTest(
                 })
                 .after(function () {
                     frisby.create('so validate accepts the accessToken')
-                        .post('http://localhost:' + config.get('httpPort') + '/validate', {
+                        .post('http://localhost:' + httpPort + '/validate', {
                             "accessToken": response.accessToken
                         })
                         .expectStatus(200)
@@ -91,14 +92,14 @@ syncTestRunner.registerTest(
 
 syncTestRunner.registerTest(
     frisby.create('Authenticating for signing out')
-        .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+        .post('http://localhost:' + httpPort + '/authenticate', {
             "username": "test",
             "password": "test",
             "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('then logging out with valid credentials invalidate the session')
-                .post('http://localhost:' + config.get('httpPort') + '/signout', {
+                .post('http://localhost:' + httpPort + '/signout', {
                     "username": "test",
                     "password": "test"
                 })
@@ -107,7 +108,7 @@ syncTestRunner.registerTest(
                 .expectJSONLength(0)
                 .after(function () {
                     frisby.create('so validate rejects the accessToken')
-                        .post('http://localhost:' + config.get('httpPort') + '/validate', {
+                        .post('http://localhost:' + httpPort + '/validate', {
                             "accessToken": response.accessToken
                         })
                         .expectStatus(200)

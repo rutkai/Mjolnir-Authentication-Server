@@ -1,8 +1,9 @@
 var frisby = require('frisby');
 var config = require('config');
+var httpPort = config.get('authserver.httpPort');
 
 frisby.create('Root path shows basic information')
-    .get('http://localhost:' + config.get('httpPort'))
+    .get('http://localhost:' + httpPort)
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
     .expectJSON({

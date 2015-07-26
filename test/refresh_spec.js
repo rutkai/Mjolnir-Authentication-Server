@@ -1,9 +1,10 @@
 var frisby = require('frisby');
 var config = require('config');
+var httpPort = config.get('authserver.httpPort');
 var syncTestRunner = require('./synchronousTestRunner');
 
 frisby.create('Nothing gives illegal argument error')
-    .get('http://localhost:' + config.get('httpPort') + '/refresh')
+    .get('http://localhost:' + httpPort + '/refresh')
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
     .expectJSON({
@@ -17,7 +18,7 @@ frisby.create('Nothing gives illegal argument error')
     .toss();
 
 frisby.create('Missing client token gives invalid token error')
-    .post('http://localhost:' + config.get('httpPort') + '/refresh', {
+    .post('http://localhost:' + httpPort + '/refresh', {
         "accessToken": "nonexistent"
     })
     .expectStatus(200)
@@ -34,14 +35,14 @@ frisby.create('Missing client token gives invalid token error')
 
 syncTestRunner.registerTest(
 frisby.create('Authenticating for refresh')
-    .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+    .post('http://localhost:' + httpPort + '/authenticate', {
         "username": "test",
         "password": "test",
         "clientToken": "test-client-token"
     })
     .afterJSON(function () {
         frisby.create('then wrong access token gives invalid token error')
-            .post('http://localhost:' + config.get('httpPort') + '/refresh', {
+            .post('http://localhost:' + httpPort + '/refresh', {
                 "accessToken": "nonexistent",
                 "clientToken": "test-client-token"
             })
@@ -64,14 +65,14 @@ frisby.create('Authenticating for refresh')
 
 syncTestRunner.registerTest(
     frisby.create('Authenticating for refresh')
-        .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+        .post('http://localhost:' + httpPort + '/authenticate', {
             "username": "test",
             "password": "test",
             "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('then wrong client token gives invalid token error')
-                .post('http://localhost:' + config.get('httpPort') + '/refresh', {
+                .post('http://localhost:' + httpPort + '/refresh', {
                     "accessToken": response.accessToken,
                     "clientToken": "nonexistent"
                 })
@@ -94,14 +95,14 @@ syncTestRunner.registerTest(
 
 syncTestRunner.registerTest(
     frisby.create('Authenticating for refresh')
-        .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+        .post('http://localhost:' + httpPort + '/authenticate', {
             "username": "test",
             "password": "test",
             "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('then refreshing with valid tokens gives new access token')
-                .post('http://localhost:' + config.get('httpPort') + '/refresh', {
+                .post('http://localhost:' + httpPort + '/refresh', {
                     "accessToken": response.accessToken,
                     "clientToken": "test-client-token"
                 })
@@ -126,14 +127,14 @@ syncTestRunner.registerTest(
 
 syncTestRunner.registerTest(
     frisby.create('Authenticating for refresh')
-        .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+        .post('http://localhost:' + httpPort + '/authenticate', {
             "username": "test",
             "password": "test",
             "clientToken": "test-client-token"
         })
         .afterJSON(function (response) {
             frisby.create('then refreshing with valid tokens and selectedProfile gives the same selectedProfile')
-                .post('http://localhost:' + config.get('httpPort') + '/refresh', {
+                .post('http://localhost:' + httpPort + '/refresh', {
                     "accessToken": response.accessToken,
                     "clientToken": "test-client-token",
                     "selectedProfile": {

@@ -1,8 +1,9 @@
 var frisby = require('frisby');
 var config = require('config');
+var httpPort = config.get('authserver.httpPort');
 
 frisby.create('Nothing gives authentication error')
-    .get('http://localhost:' + config.get('httpPort') + '/authenticate')
+    .get('http://localhost:' + httpPort + '/authenticate')
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
     .expectJSON({
@@ -16,7 +17,7 @@ frisby.create('Nothing gives authentication error')
     .toss();
 
 frisby.create('Missing user gives authentication error')
-    .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+    .post('http://localhost:' + httpPort + '/authenticate', {
         "username": "nonexistent",
         "password": "asdf"
     })
@@ -33,7 +34,7 @@ frisby.create('Missing user gives authentication error')
     .toss();
 
 frisby.create('Wrong password gives authentication error')
-    .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+    .post('http://localhost:' + httpPort + '/authenticate', {
         "username": "test",
         "password": "asdf"
     })
@@ -50,7 +51,7 @@ frisby.create('Wrong password gives authentication error')
     .toss();
 
 frisby.create('Valid credentials without clientToken and agent token')
-    .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+    .post('http://localhost:' + httpPort + '/authenticate', {
         "username": "test",
         "password": "test"
     })
@@ -63,7 +64,7 @@ frisby.create('Valid credentials without clientToken and agent token')
     .toss();
 
 frisby.create('Valid credentials with clientToken and agent token')
-    .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+    .post('http://localhost:' + httpPort + '/authenticate', {
         "username": "test",
         "password": "test",
         "clientToken": "test-client-token"
@@ -80,7 +81,7 @@ frisby.create('Valid credentials with clientToken and agent token')
     .toss();
 
 frisby.create('Valid credentials with agent token')
-    .post('http://localhost:' + config.get('httpPort') + '/authenticate', {
+    .post('http://localhost:' + httpPort + '/authenticate', {
         "agent": {
             "name": "Minecraft",
             "version": 1
@@ -93,12 +94,12 @@ frisby.create('Valid credentials with agent token')
     .expectJSON({
         "availableProfiles": [
             {
-                "id": "test0123456789abcdef",
+                "id": "650bed2c-9ef5-4b5f-b02c-61fa493c68b5",
                 "name": "testPlayer"
             }
         ],
         "selectedProfile": {
-            "id": "test0123456789abcdef",
+            "id": "650bed2c-9ef5-4b5f-b02c-61fa493c68b5",
             "name": "testPlayer"
         }
     })

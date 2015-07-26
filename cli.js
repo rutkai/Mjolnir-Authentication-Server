@@ -1,10 +1,12 @@
 var config = require('config');
 var promptly = require('promptly');
 var crypto = require('crypto');
+var uuid = require('node-uuid');
 
 var argv = require('yargs')
     .usage('Usage: $0 <command> [options]')
     .command('create-hash', 'Creates a hash for a password using the defined hash algorithm.')
+    .command('generate-uuid', 'Generates a UUID which is compatible with Minecraft.')
     .demand(1)
     .help('h')
     .alias('h', 'help')
@@ -13,6 +15,9 @@ var argv = require('yargs')
 switch (argv._[0]) {
     case 'create-hash':
         createHash();
+        break;
+    case 'generate-uuid':
+        generateUUID();
         break;
     default:
         console.log('Invalid command! Use --help for more information.');
@@ -35,4 +40,8 @@ function createHash() {
     promptly.password('Password: ', { validator: passwordValidator }, function (err, password) {
         console.log('Password hash: ', crypto.createHash(algorithm).update(password).digest("hex"));
     });
+}
+
+function generateUUID() {
+    console.log(uuid.v4());
 }
