@@ -94,12 +94,12 @@ frisby.create('Valid credentials with agent token')
     .expectJSON({
         "availableProfiles": [
             {
-                "id": "650bed2c-9ef5-4b5f-b02c-61fa493c68b5",
+                "id": "650bed2c9ef54b5fb02c61fa493c68b5",
                 "name": "testPlayer"
             }
         ],
         "selectedProfile": {
-            "id": "650bed2c-9ef5-4b5f-b02c-61fa493c68b5",
+            "id": "650bed2c9ef54b5fb02c61fa493c68b5",
             "name": "testPlayer"
         }
     })

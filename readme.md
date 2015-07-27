@@ -27,7 +27,7 @@ Installation
 
 Node.js have to be installed on your system.
 
-#### Installation on Debian based systems (e.g. Ubuntu):
+#### Installation Node.js on Debian based systems (e.g. Ubuntu):
 
     sudo apt-get install nodejs
     
@@ -35,13 +35,13 @@ The command above may not register the command `node` on your system. It is reco
 
     sudo ln -s nodejs /usr/bin/node
     
-#### Installation on Windows
+### Mjolnir Authentication server
 
-[Download](https://nodejs.org/download/) and install the latest version of Node.js.
+Download the sources from github:
 
-### Authentication server
-
-Download the sources, then:
+    git clone 
+ 
+Then:
 
     npm install --production
 
@@ -55,11 +55,11 @@ To start server you have to execute the following command in console:
 
     NODE_ENV=production node app.js
 
-If you want to use your authentication server, I can recommend using [forever](https://github.com/foreverjs/forever).
+If you want to use your authentication server as a daemon, I can recommend using [forever](https://github.com/foreverjs/forever).
 
 #### Installing and configuring Apache proxy
 
-Install Apache2:
+Install Apache2 on Debian based systems (e.g. Ubuntu):
 
     sudo apt-get install apache2
     
@@ -67,7 +67,7 @@ Then enable modproxy:
 
     sudo a2enmod proxy_http
 
-Then add the following lines to your Apache2 config (usually `/etc/apache2/sites-enabled/000-default`):
+And add the following lines to your Apache2 config (usually `/etc/apache2/sites-enabled/000-default`):
 
     # Authserver
     <VirtualHost *:443>
@@ -109,7 +109,7 @@ Then add the following lines to your Apache2 config (usually `/etc/apache2/sites
         ProxyPassReverse / http://localhost:9010/
     </VirtualHost>
 
-Note: You have to start your Mjolnir server to create the certificate files!
+*Note: You have to start your Mjolnir server to create the certificate files!*
     
 #### Selecting encryption algorithm
 
@@ -125,13 +125,13 @@ Windows: C:\Windows\System32\drivers\etc\hosts
 
 Linux: /etc/hosts
 
-    <ip-addr-of-your-auth-server>	authserver.mojang.com
+    <ip-addr-of-your-auth-server> authserver.mojang.com sessionserver.mojang.com
     
-Note: if you don't know the IP address of the auth server, open a command line and ping the domain: `ping your.domain.com` 
+*Note: if you don't know the IP address of the auth server, open a command line and ping the domain: `ping your.domain.com`*
     
 Or if the auth server is on the same machine on the Minecraft server/client:
 
-    127.0.0.1 authserver.mojang.com
+    127.0.0.1 authserver.mojang.com sessionserver.mojang.com
 
 Then, you have to trust the server's certificate. It is a fake one so this step is necessary.
 
@@ -149,12 +149,12 @@ Then, you have to copy the newly generated `jssecacerts` file to the following d
 
     <JAVA_HOME>/jre/lib/security
 
-Note: <JAVA_HOME> is usually
+*Note: <JAVA_HOME> is usually*
 
 * `/usr/lib/jvm/java-*` on linux machines.
 * `C:\Program files (x86)\Java` on windows machines.
 
-Note 2: The windows Minecraft launcher may download a different Java version than the installed. You may find this version in the `runtime` folder which should be in the same folder as the `launcher.exe`
+*Note 2: The windows Minecraft launcher may download a different Java version than the installed. You may find this version in the `runtime` folder which should be in the same folder as the `launcher.exe`*
 
 Configuration
 -------------
@@ -163,13 +163,12 @@ There are three configuration files:
 
 * config/default.json: Development mode and default configurations
 * config/testing.json: Testing mode, tweaked for automated testing
-* config/production.json: Production mode, override the defaults for your server here
+* config/production.json: Production mode, **override the defaults for your server here**
 
-Important notes for configuring the Production environment:
+**Important notes** for configuring the Production environment:
 
 * Do not use md5 and other weak password hashing algorithms!
 * The secret token must be changed to a randomly generated token!
-* The user in the production config serves as an example, remove it before going out in production!
 
 ### Creating a user in config
 
@@ -177,16 +176,16 @@ Open the `config/production.json` file using a text editor. Then add the followi
 
     "users": [
         {   // a user
-          "id": "6c84fb90-12c4-12e1-840d-7b25c5ee775a", // this ID must be a UUID and it must be unique!
+          "id": "6c84fb90-12c4-12e1-840d-7b25c5ee775a", // This ID must be a UUID and it must be unique! See Utilities section.
           "username": "test",
-          "password": "098f6bcd4621d373cade4e832627b4f6", // here is your encrypted password using the algorithm that you've selected
+          "password": "098f6bcd4621d373cade4e832627b4f6", // Here is your encrypted password using the algorithm that you've selected. See Utilities section.
           "playerName": "test"
         },
         {   // a second sample user
           "id": "110ec58a-aaf2-4ac4-8393-c866d813b8d1",
-          "username": "test",
+          "username": "test2",
           "password": "098f6bcd4621d373cade4e832627b4f6",
-          "playerName": "test"
+          "playerName": "test2"
         }
     ]
 
@@ -201,7 +200,7 @@ You can generate password hashes using the command line interface. Usage (produc
     
 Then type in your password using the interactive console.
 
-Note: You will not see the characters you are typing in!
+*Note: You will not see the characters you are typing in!*
 
 ### UUID generator
 
