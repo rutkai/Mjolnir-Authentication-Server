@@ -53,6 +53,12 @@ public class InstallCert {
         String host;
         int port;
         char[] passphrase;
+        char SEP = File.separatorChar;
+        if ((args.length == 1) && "SecurityPath".equals(args[0])) {
+            System.out.print(System.getProperty("java.home") + SEP
+                    + "lib" + SEP + "security");
+            return;
+        }
         if ((args.length == 1) || (args.length == 2)) {
             String[] c = args[0].split(":");
             host = c[0];
@@ -66,7 +72,6 @@ public class InstallCert {
 
         File file = new File("jssecacerts");
         if (file.isFile() == false) {
-            char SEP = File.separatorChar;
             File dir = new File(System.getProperty("java.home") + SEP
                     + "lib" + SEP + "security");
             file = new File(dir, "jssecacerts");
@@ -129,18 +134,8 @@ public class InstallCert {
             System.out.println();
         }
 
-        System.out.println("Enter certificate to add to trusted keystore or 'q' to quit: [1]");
-        String line = reader.readLine().trim();
-        int k;
-        try {
-            k = (line.length() == 0) ? 0 : Integer.parseInt(line) - 1;
-        } catch (NumberFormatException e) {
-            System.out.println("KeyStore not changed");
-            return;
-        }
-
-        X509Certificate cert = chain[k];
-        String alias = host + "-" + (k + 1);
+        X509Certificate cert = chain[0];
+        String alias = host + "-" + 1;
         ks.setCertificateEntry(alias, cert);
 
         OutputStream out = new FileOutputStream("jssecacerts");

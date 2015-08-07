@@ -141,7 +141,7 @@ syncTestRunner.registerTest(
                 .post('http://localhost:' + httpPort + '/session/minecraft/join', {
                     "accessToken": response.accessToken,
                     "selectedProfile": response.selectedProfile.id,
-                    "serverId": "random"
+                    "serverId": "5555"
                 })
                 .expectStatus(200)
                 .expectHeaderContains('content-type', 'application/json')
@@ -152,4 +152,3 @@ syncTestRunner.registerTest(
                 .toss();
         })
 );
-

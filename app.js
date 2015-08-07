@@ -1,13 +1,15 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var logger = require('./lib/logger');
 var http = require('http');
 var https = require('https');
 var pem = require('pem');
 var config = require('config');
 var fs = require('fs');
 var actions = require('./lib/actions');
+var logger = require('./lib/logger');
+var keychain = require('./lib/keychain');
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -34,6 +36,8 @@ app.all('/session/minecraft/hasJoined', actions.sessionHasJoined);
 
 // Other
 app.all('*', function (request, response) {
+    console.log('Unknown request: ');
+    console.log(request.headers.host, request.originalUrl);
     console.log(request.body);
     response.json({
         error: "Not Found",
@@ -55,6 +59,9 @@ function startServer(server) {
             console.log(err);
             return;
         }
+
+        keychain.store(server + '.key', keys.serviceKey);
+        keychain.store(server + '.crt', keys.certificate);
 
         fs.writeFile('./cert/' + server + '/certificate.key', keys.serviceKey, function (err) {
             if (err) {
