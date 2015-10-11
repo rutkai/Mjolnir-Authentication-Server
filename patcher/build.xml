@@ -10,6 +10,7 @@
             <classpath>
                 <pathelement path="."/>
                 <pathelement location="lib/lzma-4.63-jio-0.93.jar"/>
+                <pathelement location="lib/gson-2.4.jar"/>
             </classpath>
         </javac>
         <manifest file="dist/MANIFEST.MF">

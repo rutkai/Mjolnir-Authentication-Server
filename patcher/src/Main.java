@@ -1,11 +1,14 @@
 import commands.CertInstaller;
 import commands.HostsPatcher;
 import commands.LauncherPatcher;
+import commands.ServerPatcher;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.UnknownHostException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.prefs.Preferences;
 
 /**
@@ -38,6 +41,9 @@ public class Main {
             case "patch-launcher":
                 patchLauncher();
                 break;
+            case "patch-server":
+                patchServer();
+                break;
             default:
                 printHelp();
                 break;
@@ -52,6 +58,7 @@ public class Main {
         System.out.println("  unpatch-hosts   : un-patches the hosts file to use the original");
         System.out.println("  install-certs   : installs trusted certificates from your server server (requires patch-hosts)");
         System.out.println("  patch-launcher  : downloads a new client and patches it with your certificates");
+        System.out.println("  patch-server    : downloads a new server and patches it with your certificates");
     }
 
     private static void checkRoles() {
@@ -132,6 +139,7 @@ public class Main {
     }
 
     private static void patchLauncher() {
+        System.out.print("Downloading and patching launcher...");
         LauncherPatcher patcher = new LauncherPatcher();
         try {
             patcher.savePatchedLauncher();
@@ -140,6 +148,35 @@ public class Main {
             e.printStackTrace();
             System.exit(1);
         }
+        System.out.println("done!");
+    }
+
+    private static void patchServer() {
+        try {
+            ServerPatcher patcher = new ServerPatcher();
+            String version = getServerVersion(patcher);
+            System.out.print("Downloading and patching server...");
+            patcher.savePatchedLauncher(version);
+        } catch (Exception e) {
+            System.out.println("Unhandled exception during installation:");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        System.out.println("done!");
+    }
+
+    private static String getServerVersion(ServerPatcher patcher) throws Exception {
+        System.out.println("Available versions:");
+        System.out.println(patcher.versions().getVersions());
+        System.out.print("Version to download (default: " + patcher.versions().latest.release + "): ");
+        String version = System.console().readLine().trim();
+        if ("".equals(version)) {
+            version = patcher.versions().latest.release;
+        }
+        if (!patcher.versions().hasVersion(version)) {
+            throw new Exception("Version is not valid!");
+        }
+        return version;
     }
 
 }
