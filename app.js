@@ -22,6 +22,9 @@ if (process.env.MJOLNIR_VERBOSE) {
 }
 
 
+// Images
+app.use('/images', express.static('images'));
+
 // Authserver
 app.all('/', actions.root);
 app.all('/authenticate', actions.authenticate);

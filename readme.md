@@ -1,4 +1,4 @@
-Mjolnir Authentication Server
+Mjölnir Authentication Server
 =============================
 
 Abstract
@@ -12,9 +12,8 @@ Features (planned):
 - Own users database
 - Backup authentication server (in proxy mode)
 
-In which cases are good such system?
+In which cases are good such a system?
 
-- You are afraid of Microsoft and their future authentication system.
 - You have users who do not have premium but you still want to maintain an online server.
 - You want to have a backup authentication system.
 - ...or just because you can do it. :)
@@ -51,7 +50,7 @@ Generate a new SSL certificate for your server:
     
 *Note that you may have to change the owner of the certification to the same user as node server's!*
     
-To start server you have to execute the following command in console:
+To start the server you have to execute the following command in console:
 
     NODE_ENV=production node app.js
 

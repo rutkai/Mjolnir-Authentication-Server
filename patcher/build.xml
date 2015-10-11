@@ -1,0 +1,32 @@
+<project name="MyProject" default="create-jar" basedir=".">
+    <description>
+        Build helper for compiling
+    </description>
+
+    <target name="create-jar">
+        <mkdir dir="build"/>
+        <mkdir dir="dist"/>
+        <javac srcdir="src" destdir="build">
+            <classpath>
+                <pathelement path="."/>
+                <pathelement location="lib/lzma-4.63-jio-0.93.jar"/>
+            </classpath>
+        </javac>
+        <manifest file="dist/MANIFEST.MF">
+            <attribute name="Main-Class" value="Main"/>
+        </manifest>
+        <jar jarfile="dist/patcher.jar" basedir="build" manifest="dist/MANIFEST.MF">
+            <zipgroupfileset dir="lib" includes="*.jar"/>
+        </jar>
+    </target>
+
+    <target name="create-exe" depends="create-jar">
+        <java jar="launch4j/launch4j.jar" fork="true">
+            <arg value="launch4j.config.xml"/>
+        </java>
+    </target>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+</project>

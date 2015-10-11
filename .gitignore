@@ -1,4 +1,10 @@
+/images/*
+!/images/.gitkeep
+!/images/steve.png
 node_modules
 .idea
-cert/*/*
-!cert/*/.gitkeep
+/cert/*/*
+!/cert/*/.gitkeep
+/patcher/build
+/patcher/out
+/patcher/*.iml
