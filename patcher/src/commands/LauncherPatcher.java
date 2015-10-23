@@ -51,9 +51,15 @@ public class LauncherPatcher extends BasePatcher {
             zos.putNextEntry(entry);
             zos.write(manifest.getBytes(), 0, manifest.length());
             return true;
+        } else if (skipFile(inEntry.getName())) {
+            return true;
         }
 
         return false;
+    }
+
+    private boolean skipFile(String filename) {
+        return filename.equalsIgnoreCase("META-INF/MOJANGCS.RSA") || filename.equalsIgnoreCase("META-INF/MOJANGCS.SF");
     }
 
     private String sha256Digest(byte[] file) throws NoSuchAlgorithmException {

@@ -34,12 +34,16 @@ package commands;
 import lib.CertKeyStoreManager;
 
 import javax.net.ssl.*;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.security.spec.X509EncodedKeySpec;
 
 /**
  * Certificate management class
@@ -76,6 +80,13 @@ public class CertManager {
             throw new KeyManagementException("Could not obtain server certificate chain");
         }
         return chain[0];
+    }
+
+    public X509EncodedKeySpec getKey(String host) throws CertificateException, KeyManagementException, NoSuchAlgorithmException, KeyStoreException, IOException {
+        CertificateFactory certFactory = CertificateFactory.getInstance("X509");
+        Certificate certificate = certFactory.generateCertificate(new ByteArrayInputStream(getCert(host).getEncoded()));
+
+        return new X509EncodedKeySpec(certificate.getPublicKey().getEncoded());
     }
 
     private void performHandshake(SavingTrustManager tm, String host) throws KeyManagementException, NoSuchAlgorithmException, IOException {

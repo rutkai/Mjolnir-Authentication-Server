@@ -1,5 +1,6 @@
 {
   "serverOwner": "Developer",
+  "serverDomain": "authserver.mojang.com",
   "timestampFormat": "YYYY-MM-DD HH:mm:ss| ",
   "hashAlgorithm": "md5",
   "secret": "Dev token",

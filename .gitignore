@@ -1,6 +1,8 @@
 /images/*
 !/images/.gitkeep
 !/images/steve.png
+/static/*
+!/static/.gitkeep
 node_modules
 .idea
 /cert/*/*

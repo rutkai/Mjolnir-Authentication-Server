@@ -24,6 +24,7 @@ if (process.env.MJOLNIR_VERBOSE) {
 
 // Images
 app.use('/images', express.static('images'));
+app.use('/static', express.static('static'));
 
 // Authserver
 app.all('/', actions.root);

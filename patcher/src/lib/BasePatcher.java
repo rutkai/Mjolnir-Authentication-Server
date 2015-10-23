@@ -59,7 +59,7 @@ public abstract class BasePatcher {
 
         CertKeyStoreManager keyStoreManager = new CertKeyStoreManager();
         CertManager cm = new CertManager(keyStoreManager);
-        sessionserverCertification = cm.getCert("sessionserver.mojang.com").getEncoded();
+        sessionserverCertification = cm.getKey("sessionserver.mojang.com").getEncoded();
 
         return sessionserverCertification;
     }
