@@ -85,13 +85,15 @@ public class HostsPatcher {
     private String addHosts(String file, String ip) {
         return file + "\n" +
                  ip + " authserver.mojang.com\n" +
-                 ip + " sessionserver.mojang.com\n";
+                 ip + " sessionserver.mojang.com\n" +
+                 ip + " api.mojang.com\n";
     }
 
     private String stripHosts(String file) {
         return file
                 .replaceAll("(?m)^[0-9.]+\\s+authserver\\.mojang\\.com\\n?$", "")
-                .replaceAll("(?m)^[0-9.]+\\s+sessionserver\\.mojang\\.com\\n?$", "");
+                .replaceAll("(?m)^[0-9.]+\\s+sessionserver\\.mojang\\.com\\n?$", "")
+                .replaceAll("(?m)^[0-9.]+\\s+api\\.mojang\\.com\\n?$", "");
     }
 
 }

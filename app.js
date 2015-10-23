@@ -37,13 +37,19 @@ app.all('/invalidate', actions.invalidate);
 // Sessionserver
 app.all('/session/minecraft/join', actions.sessionJoin);
 app.all('/session/minecraft/hasJoined', actions.sessionHasJoined);
+app.all('/session/minecraft/profile/:uuid', actions.sessionUUIDToProfile);
+
+// APIserver
+app.all('/users/profiles/minecraft/:name', actions.apiNameToUUID);
+app.all('/user/profiles/:uuid/names', actions.apiUUIDToName);
+app.all('/profiles/minecraft', actions.apiPlayernamesToUUID);
 
 // Other
 app.all('*', function (request, response) {
     console.log('Unknown request: ');
     console.log(request.headers.host, request.originalUrl);
     console.log(request.body);
-    response.json({
+    response.status(404).json({
         error: "Not Found",
         errorMessage: "The server has not found anything matching the request URI"
     });
@@ -52,6 +58,7 @@ app.all('*', function (request, response) {
 
 startServer('sessionserver');
 startServer('authserver');
+startServer('apiserver');
 
 
 function startServer(server) {

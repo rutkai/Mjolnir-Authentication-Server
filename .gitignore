@@ -1,6 +1,8 @@
-/images/*
-!/images/.gitkeep
-!/images/steve.png
+/images/*.*
+/images/skin/*
+/images/cape/*
+!/images/*/.gitkeep
+!/images/skin/steve.png
 /static/*
 !/static/.gitkeep
 node_modules

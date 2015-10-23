@@ -3,7 +3,7 @@ var config = require('config');
 var moment = require('moment');
 var crypto = require('crypto');
 var fs = require('fs');
-var httpPort = config.get('authserver.httpPort');
+var httpPort = config.get('sessionserver.httpPort');
 var syncTestRunner = require('./synchronousTestRunner');
 
 frisby.create('Nothing gives empty response')
@@ -105,7 +105,7 @@ function textureValueValidator(value) {
     expect(typeof value.textures).toBe('object');
     expect(typeof value.textures.SKIN).toBe('object');
     expect(typeof value.textures.SKIN.url).toBe('string');
-    expect(value.textures.SKIN.url).toBe('https://minecraft.net/images/steve.png');
+    expect(value.textures.SKIN.url).toBe('https://authserver.mojang.com/images/skin/steve.png');
 
     return true;
 }

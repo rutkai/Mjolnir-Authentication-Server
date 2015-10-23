@@ -1,6 +1,6 @@
 var frisby = require('frisby');
 var config = require('config');
-var httpPort = config.get('authserver.httpPort');
+var httpPort = config.get('sessionserver.httpPort');
 var syncTestRunner = require('./synchronousTestRunner');
 
 frisby.create('Nothing gives illegal argument error')

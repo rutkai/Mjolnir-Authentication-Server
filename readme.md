@@ -11,6 +11,7 @@ Features (planned):
 
 - Own users database
 - Backup authentication server (in proxy mode)
+- Rate limit
 
 In which cases are good such a system?
 

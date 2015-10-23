@@ -22,6 +22,15 @@
       "commonName": "sessionserver.mojang.com"
     }
   },
+  "apiserver": {
+    "httpPort": 9020,
+    "httpsPort": 9021,
+    "certification": {
+      "days": 365,
+      "selfSigned": true,
+      "commonName": "apiserver.mojang.com"
+    }
+  },
   "drivers": ["config"],
   "users": [
   ]
