@@ -18,7 +18,7 @@ Then:
 
     npm install --production
 
-Generate a new SSL certificate for your server:
+Generate new SSL certificates for your server:
 
     ./generate_ssl.sh
     
