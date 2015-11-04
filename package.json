@@ -5,8 +5,8 @@
   "homepage": "",
   "main": "index.js",
   "scripts": {
-    "test": "true",
-    "start": "node index.js"
+    "test": "jasmine-node test",
+    "start": "node app.js"
   },
   "keywords": [
     "mjolnir",

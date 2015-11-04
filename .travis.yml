@@ -1,16 +1,10 @@
 language: node_js
 node_js:
-- '0.12'
-- '0.11'
-- '0.10'
+  - '0.12'
+  - '0.11'
+  - '0.10'
 before_install:
-- npm install -g frisby
-- npm install -g jasmine-node
-install: npm install
+  - npm install -g frisby
+  - npm install -g jasmine-node
 env:
-  global:
-    NODE_ENV=testing
-before_script:
-- node app.js
-- sleep 2
-script: jasmine-node test
+  - NODE_ENV=testing
