@@ -1,7 +1,4 @@
-import commands.CertInstaller;
-import commands.HostsPatcher;
-import commands.LauncherPatcher;
-import commands.ServerPatcher;
+import commands.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -39,23 +36,27 @@ public class Main {
             case "patch-launcher":
                 patchLauncher();
                 break;
+            case "patch-authlib":
+                patchAuthlib();
+                break;
             case "patch-server":
                 patchServer();
                 break;
             default:
+                System.out.println("No command line arguments!");
                 printHelp();
                 break;
         }
     }
 
     private static void printHelp() {
-        System.out.println("No command line arguments!");
         System.out.println("The following commands are available:");
         System.out.println("  help            : prints this help");
         System.out.println("  patch-hosts     : patches the hosts file to use your own server");
         System.out.println("  unpatch-hosts   : un-patches the hosts file to use the original");
         System.out.println("  install-certs   : installs trusted certificates from your server server (requires patch-hosts)");
         System.out.println("  patch-launcher  : downloads a new client and patches it with your certificates");
+        System.out.println("  patch-authlib   : patches the latest downloaded authlib to use your certificate");
         System.out.println("  patch-server    : downloads a new server and patches it with your certificates");
     }
 
@@ -142,7 +143,20 @@ public class Main {
         try {
             patcher.savePatchedLauncher();
         } catch (Exception e) {
-            System.out.println("Unhandled exception during installation:");
+            System.out.println("Unhandled exception during the process:");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        System.out.println("done!");
+    }
+
+    private static void patchAuthlib() {
+        System.out.print("Patching existing authlib...");
+        AuthlibPatcher patcher = new AuthlibPatcher();
+        try {
+            patcher.patch();
+        } catch (Exception e) {
+            System.out.println("Unhandled exception during patching:");
             e.printStackTrace();
             System.exit(1);
         }
@@ -156,7 +170,7 @@ public class Main {
             System.out.print("Downloading and patching server...");
             patcher.savePatchedLauncher(version);
         } catch (Exception e) {
-            System.out.println("Unhandled exception during installation:");
+            System.out.println("Unhandled exception during the process:");
             e.printStackTrace();
             System.exit(1);
         }
