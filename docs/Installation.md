@@ -42,6 +42,10 @@ Then enable modproxy:
 
     sudo a2enmod proxy_http
 
+And modssl:
+
+    sudo a2enmod ssl
+
 And add the following lines to your Apache2 config (usually `/etc/apache2/sites-enabled/000-default`):
 
     # Authserver
@@ -105,6 +109,10 @@ And add the following lines to your Apache2 config (usually `/etc/apache2/sites-
     </VirtualHost>
 
 *Note: First, you have to start your Mjölnir server to create the certificate files!*
+
+Finally, restart apache2 to reload the configuration:
+
+    sudo service apache2 restart
 
 ## Configuration
 
