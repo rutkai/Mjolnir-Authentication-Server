@@ -2,8 +2,8 @@
   "name": "mjolnir-authentication-server",
   "version": "1.0.0",
   "description": "Mjolnir Authentication - an open source alternative to Yggdrasil Authentication",
-  "homepage": "",
-  "main": "index.js",
+  "homepage": "https://github.com/riskawarrior/Mjolnir-Authentication-Server",
+  "main": "app.js",
   "scripts": {
     "test": "jasmine-node test",
     "start": "node app.js"
@@ -30,6 +30,6 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/riskawarrior/Mjolnir-Authentication-Server"
   }
 }
