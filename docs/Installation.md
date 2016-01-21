@@ -12,7 +12,7 @@ Node.js have to be installed on your system.
 
 Download the sources from github:
 
-    git clone 
+    git clone https://github.com/riskawarrior/Mjolnir-Authentication-Server.git
  
 Then:
 
