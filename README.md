@@ -48,8 +48,6 @@ Specification
 Roadmap/Changelog
 -----------------
 
-Current version: 1.0.0
-
 * 1.0.0: User management with file backend
 * 1.1.0: MongoDB backend
 * 1.2.0: Transparent (proxy) mode
