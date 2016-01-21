@@ -3,10 +3,13 @@ node_js:
   - '5.5'
   - '4.2'
   - '0.12'
-  - '0.11'
-  - '0.10'
 before_install:
   - npm install -g frisby
   - npm install -g jasmine-node
+before_script:
+  - npm start &
+  - sleep 5
+after_script:
+  - process.exit()
 env:
   - NODE_ENV=testing
