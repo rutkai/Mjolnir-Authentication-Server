@@ -31,7 +31,10 @@
       "commonName": "apiserver.mojang.com"
     }
   },
-  "drivers": ["config"],
+  "drivers": ["config", "mongodb"],
+  "mongodb": {
+    "connectionStr": "mongodb://localhost:27017/mjolnir"
+  },
   "users": [
   ]
 }

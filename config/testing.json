@@ -34,5 +34,6 @@
       "accessToken": "d41d8cd98f00b204e9800998ecf8427e",
       "lastLogin": "2015-04-23T18:25:43.511Z"
     }
-  ]
+  ],
+  "drivers": ["config"]
 }

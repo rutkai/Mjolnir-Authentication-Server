@@ -18,6 +18,8 @@ Then:
 
     npm install --production
 
+*On linux based systems you may have to install libkrb5-dev package for compiling mongodb plugin pre-requisites.*
+
 Generate new SSL certificates for your server:
 
     ./generate_ssl.sh
