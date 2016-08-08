@@ -1,12 +1,14 @@
 language: node_js
 sudo: false
 node_js:
-  - '5.5'
-  - '4.2'
+  - '6'
+  - '5'
+  - '4'
   - '0.12'
 before_install:
   - npm install -g frisby
   - npm install -g jasmine-node
+  - ./generate_ssl.sh
 before_script:
   - npm start &
   - sleep 5
