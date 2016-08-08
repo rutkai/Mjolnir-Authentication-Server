@@ -7,6 +7,10 @@
 Node.js have to be installed on your system.
 
 [How to install Node.js via package manager](https://nodejs.org/en/download/package-manager/)
+
+If you want to use the Database backend, then you have to install MongoDB:
+
+[MongoDB Home](https://www.mongodb.com/)
     
 ### Mjolnir Authentication server
 

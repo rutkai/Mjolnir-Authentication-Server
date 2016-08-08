@@ -6,6 +6,10 @@ For testing you will need FrisbyJs and Jasmine:
 
     npm install -g frisby
     npm install -g jasmine-node
+    npm install pow-mongodb-fixtures -g
+    npm install -g underscore
+
+Note: Underscore is required because of an issue in the dependencies of mongodb-fixtures.
 
 ## Running the tests
 

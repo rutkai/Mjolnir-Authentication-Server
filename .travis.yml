@@ -5,14 +5,20 @@ node_js:
   - '5'
   - '4'
   - '0.12'
+services:
+  - mongodb
 before_install:
   - npm install -g frisby
   - npm install -g jasmine-node
+  - npm install -g underscore
+  - npm install -g pow-mongodb-fixtures
   - ./generate_ssl.sh
 before_script:
+  - mongofixtures test fixtures
   - npm start &
   - sleep 5
 after_script:
   - process.exit()
 env:
-  - NODE_ENV=testing
+  - NODE_ENV=testing-config
+  - NODE_ENV=testing-mongodb
