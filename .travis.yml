@@ -22,3 +22,12 @@ after_script:
 env:
   - NODE_ENV=testing-config
   - NODE_ENV=testing-mongodb
+  - NODE_ENV=testing-fallback
+matrix:
+  exclude:
+    - node_js: '6'
+      env: NODE_ENV=testing-fallback
+    - node_js: '5'
+      env: NODE_ENV=testing-fallback
+    - node_js: '0.12'
+      env: NODE_ENV=testing-fallback

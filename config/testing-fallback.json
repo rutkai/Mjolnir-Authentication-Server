@@ -1,0 +1,39 @@
+{
+  "serverOwner": "Tester",
+  "timestampFormat": "YYYY-MM-DD HH:mm:ss| ",
+  "hashAlgorithm": "md5",
+  "secret": "test-token",
+  "authserver": {
+    "httpPort": 6666,
+    "httpsPort": 6667
+  },
+  "sessionserver": {
+    "httpPort": 6677,
+    "httpsPort": 6678
+  },
+  "apiserver": {
+    "httpPort": 6688,
+    "httpsPort": 6689
+  },
+  "users": [
+    {
+      "id": "650bed2c-9ef5-4b5f-b02c-61fa493c68b5",
+      "username": "test",
+      "password": "098f6bcd4621d373cade4e832627b4f6", // test using MD5
+      "playerName": "testPlayer",
+      "skinUrl": "steve.png"
+    },
+    {
+      "id": "0e565137-f983-49fe-ac61-15adfe19e962",
+      "username": "overlapUser",
+      "password": "912ec803b2ce49e4a541068d495ab570", // asdf using MD5
+      "playerName": "overlapPlayer",
+      "playerNameIndex": "overlapplayer",
+      "skinUrl": "steve.png"
+    }
+  ],
+  "drivers": ["config", "mongodb"],
+  "mongodb": {
+    "connectionStr": "mongodb://localhost:27017/test"
+  }
+}
