@@ -4,6 +4,7 @@ exports.user = [
         "username": "test",
         "password": "098f6bcd4621d373cade4e832627b4f6", // test using MD5
         "playerName": "testPlayer",
+        "playerNameIndex": "testplayer",
         "skinUrl": "steve.png"
     },
     {
@@ -11,6 +12,7 @@ exports.user = [
         "username": "testOld",
         "password": "098f6bcd4621d373cade4e832627b4f6",
         "playerName": "testPlayerOld",
+        "playerNameIndex": "testplayerold",
         "skinUrl": "steve.png",
         "capeUrl": "mycape.png",
         "clientToken": "test-old-client-token",
