@@ -7,6 +7,10 @@
 Node.js have to be installed on your system.
 
 [How to install Node.js via package manager](https://nodejs.org/en/download/package-manager/)
+
+If you want to use the Database backend, then you have to install MongoDB:
+
+[MongoDB Home](https://www.mongodb.com/)
     
 ### Mjolnir Authentication server
 
@@ -17,6 +21,8 @@ Download the sources from github:
 Then:
 
     npm install --production
+
+*On linux based systems you may have to install libkrb5-dev package for compiling mongodb plugin pre-requisites.*
 
 Generate new SSL certificates for your server:
 
@@ -114,6 +120,10 @@ Finally, restart apache2 to reload the configuration:
 
     sudo service apache2 restart
 
+## Database
+
+Mjolnir uses Mongodb by default. You may add your users to the database using the [Database manager](Utilities.md).
+
 ## Configuration
 
 There are three configuration files:
@@ -126,7 +136,7 @@ There are three configuration files:
 
 * Do not use md5 and other weak password hashing algorithms!
 * The secret token must be changed to a randomly generated token!
-    
+
 ### Selecting encryption algorithm
 
 You can set which encryption algorithm do you want to use to store passwords. Passwords are salted by default.
@@ -162,3 +172,5 @@ Open the `config/production.json` file using a text editor. Then add the followi
     ]
     
 For UUID and password generation, please see the [Utilities page](Utilities.md).
+
+> Note: the server runs in fallback mode by default. It means, it uses the users defined in the configuration file, then fallbacks to database.

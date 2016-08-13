@@ -1,0 +1,23 @@
+{
+  "serverOwner": "Tester",
+  "timestampFormat": "YYYY-MM-DD HH:mm:ss| ",
+  "hashAlgorithm": "md5",
+  "secret": "test-token",
+  "authserver": {
+    "httpPort": 6666,
+    "httpsPort": 6667
+  },
+  "sessionserver": {
+    "httpPort": 6677,
+    "httpsPort": 6678
+  },
+  "apiserver": {
+    "httpPort": 6688,
+    "httpsPort": 6689
+  },
+  "users": [],
+  "drivers": ["mongodb"],
+  "mongodb": {
+    "connectionStr": "mongodb://localhost:27017/test"
+  }
+}

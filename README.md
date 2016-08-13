@@ -11,7 +11,6 @@ However, Mjölnir is developed for replacing the authentication system of Minecr
 
 Features (planned):
 
-- Own users database
 - Backup authentication server (in proxy mode)
 - Rate limit
 
