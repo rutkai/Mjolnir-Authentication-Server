@@ -5,6 +5,7 @@ var promptly = require('promptly');
 var helper = require('./lib/cli/userHelper');
 var crypto = require('crypto');
 var uuid = require('node-uuid');
+var bcrypt = require('bcryptjs'); //add bcrypt library
 
 var argv = require('yargs')
     .usage('Usage: $0 <command> [options]')
@@ -62,7 +63,7 @@ function create() {
             return helper.askPassword('Password (required)');
         })
         .then(function (password) {
-            user.password = crypto.createHash(config.get('hashAlgorithm')).update(password).digest("hex");
+            user.password = bcrypt.hashSync(password); //a little more secure, no?
             return helper.askReqField('Player name (required)');
         })
         .then(function (playerName) {
@@ -161,7 +162,7 @@ function update() {
         })
         .then(function (password) {
             if (password) {
-                userDoc.password = crypto.createHash(config.get('hashAlgorithm')).update(password).digest("hex");
+                userDoc.password = bcrypt.hashSync(password);
             }
 
             return helper.askOptField('Player name (leave blank for skip)');
