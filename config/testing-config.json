@@ -1,7 +1,6 @@
 {
   "serverOwner": "Tester",
   "timestampFormat": "YYYY-MM-DD HH:mm:ss| ",
-  "hashAlgorithm": "md5",
   "secret": "test-token",
   "authserver": {
     "httpPort": 6666,
