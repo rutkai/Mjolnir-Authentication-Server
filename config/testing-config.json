@@ -1,7 +1,6 @@
 {
   "serverOwner": "Tester",
   "timestampFormat": "YYYY-MM-DD HH:mm:ss| ",
-  "hashAlgorithm": "md5",
   "secret": "test-token",
   "authserver": {
     "httpPort": 6666,
@@ -19,7 +18,7 @@
     {
       "id": "650bed2c-9ef5-4b5f-b02c-61fa493c68b5",
       "username": "test",
-      "password": "098f6bcd4621d373cade4e832627b4f6", // test using MD5
+      "password": "$2a$10$uVm5S7RjZlTyJCejSnchVOZdrvCGfeDtvahFDgrCNfGJ5R0ckmuCG", // test using bcrypt
       "playerName": "testPlayer",
       "skinUrl": "steve.png"
     },
@@ -31,7 +30,7 @@
       "skinUrl": "steve.png",
       "capeUrl": "mycape.png",
       "clientToken": "test-old-client-token",
-      "accessToken": "d41d8cd98f00b204e9800998ecf8427e",
+      "accessToken": "$2a$10$uVm5S7RjZlTyJCejSnchVOZdrvCGfeDtvahFDgrCNfGJ5R0ckmuCG",
       "lastLogin": "2015-04-23T18:25:43.511Z"
     }
   ],

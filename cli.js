@@ -1,7 +1,7 @@
-var config = require('config');
 var promptly = require('promptly');
 var crypto = require('crypto');
 var uuid = require('node-uuid');
+var bcrypt = require('bcryptjs');
 
 var argv = require('yargs')
     .usage('Usage: $0 <command> [options]')
@@ -27,7 +27,6 @@ switch (argv._[0]) {
 
 
 function createHash() {
-    var algorithm = config.get('hashAlgorithm');
     var passwordValidator = function (value) {
         if (!value) {
             throw new Error('Password cannot be empty!');
@@ -36,9 +35,8 @@ function createHash() {
         return value;
     };
 
-    console.log('Hashing algorithm: ', algorithm);
     promptly.password('Password: ', { validator: passwordValidator }, function (err, password) {
-        console.log('Password hash: ', crypto.createHash(algorithm).update(password).digest("hex"));
+        console.log('Password hash (WILL CHANGE):', bcrypt.hashSync(password));
     });
 }
 
