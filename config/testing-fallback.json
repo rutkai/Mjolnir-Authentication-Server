@@ -18,14 +18,14 @@
     {
       "id": "650bed2c-9ef5-4b5f-b02c-61fa493c68b5",
       "username": "test",
-      "password": "098f6bcd4621d373cade4e832627b4f6", // test using MD5
+      "password": "$2a$10$uVm5S7RjZlTyJCejSnchVOZdrvCGfeDtvahFDgrCNfGJ5R0ckmuCG", // test using bcrypt
       "playerName": "testPlayer",
       "skinUrl": "steve.png"
     },
     {
       "id": "0e565137-f983-49fe-ac61-15adfe19e962",
       "username": "overlapUser",
-      "password": "912ec803b2ce49e4a541068d495ab570", // asdf using MD5
+      "password": "$2a$10$uVm5S7RjZlTyJCejSnchVOZdrvCGfeDtvahFDgrCNfGJ5R0ckmuCG",
       "playerName": "overlapPlayer",
       "playerNameIndex": "overlapplayer",
       "skinUrl": "steve.png"
