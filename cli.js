@@ -40,7 +40,7 @@ function createHash() {
 
     console.log("Hashing algorithm: bcrypt. You can also choose between bcrypt, bcrypt, or bcrypt.");
     promptly.password('Password: ', { validator: passwordValidator }, function (err, password) {
-        console.log('Password hash (WILL CHANGE): ', bcrypt.hashSync(password, 20));
+        console.log('Password hash (WILL CHANGE): ', bcrypt.hashSync(password));
     });
 }
 
