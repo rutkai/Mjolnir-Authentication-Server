@@ -20,7 +20,7 @@ Download the sources from github:
  
 Then:
 
-    npm install --production
+    npm install --production && npm audit fix --force
 
 *On linux based systems you may have to install libkrb5-dev package for compiling mongodb plugin pre-requisites.*
 
